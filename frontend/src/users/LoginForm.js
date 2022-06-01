@@ -14,16 +14,17 @@ function LoginForm() {
     })
 
     const [errorMessage, setErrorMessage] = useState(null)
-  
-      
+
     async function handleSubmit(e) {
         e.preventDefault()
         const response = await fetch(`http://localhost:5000/authentication/`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(credentials)
+            
         })
 
         const data = await response.json()
@@ -34,8 +35,8 @@ function LoginForm() {
         } else {
             setErrorMessage(data.message)
         }
-
     }
+
     return (
         <main>
             <h1>Login</h1>
